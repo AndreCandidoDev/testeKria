@@ -1,10 +1,17 @@
 import Image from 'next/image';
 import { useEffect, useState } from "react"
 import { checkFavorite, favoriteRepo, unFavoriteRepo } from "@/utils/favoriteFunctions";
+import { dataRepo } from '@/interfaces/modalRepo.i';
+import { useCookies } from 'react-cookie';
 
-export const Favorite: React.FC<any> = ({ data }) =>
+interface FavoriteProps {
+    data: dataRepo
+}
+
+export const Favorite: React.FC<FavoriteProps> = ({ data }) =>
 {
     const [active, setActive] = useState<boolean>(false)
+    const [cookie, setCookie] = useCookies(['favorite'])
 
     useEffect(() => 
     {
@@ -25,11 +32,14 @@ export const Favorite: React.FC<any> = ({ data }) =>
         if(active)
         {
             setActive(false)
-            return unFavoriteRepo(String(data.id))
+            const newCookie = unFavoriteRepo(data, cookie)
+            setCookie("favorite", newCookie)
+            return
         }
 
         setActive(true)
-        return favoriteRepo(String(data.id))
+        const newCookie = favoriteRepo(data, cookie)
+        setCookie("favorite", newCookie)
     }
 
     return (

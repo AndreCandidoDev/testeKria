@@ -1,0 +1,53 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    height: 100%;
+
+    .content {
+        width: 100%;
+        height: 100%;
+        background: white;
+        position: relative;
+
+        .modalHeader {
+            width: 100%;
+            height: 40px;
+
+            .close {
+                position: absolute;
+                right: 0;
+                cursor: pointer;
+            }
+        }
+
+        .infos {
+            width: 100%;
+            padding: 3rem;
+            height: 100%;
+            background: #ccc;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .name {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .description {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

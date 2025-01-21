@@ -1,38 +1,43 @@
 import styles from "./styles.module.scss"
-import Image from 'next/image';
 import { ReposContext } from "@/context/reposProvider"
+import { dataRepo } from "@/interfaces/modalRepo.i"
 import { useContext } from "react"
-import { Favorite } from "@/components/favorite";
 
-export const TableRepos: React.FC = () => 
+interface TableReposProp {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setDataRepo: React.Dispatch<React.SetStateAction<dataRepo>>
+}
+
+export const TableRepos: React.FC<TableReposProp> = ({
+    setOpen,
+    setDataRepo,
+}) => 
 {
     const reposApp = useContext(ReposContext)
+
+    const openModal = (item: dataRepo) => 
+    {
+        setOpen(true)
+        setDataRepo(item)
+    }
 
     return (
         <table className={styles.tableRepos}>
             <thead>
                 <tr className={styles.rowHead}>
-                    <th>Favoritar</th>
                     <th>Nome Repositorio</th>
                     <th>Visibilidade</th>
-                    <th>Mais Informações</th>
                 </tr>
             </thead>
             <tbody>
-                {reposApp.data && reposApp.data.map((item:any, key: any) => (
+                {reposApp.data && reposApp.data.map((item: dataRepo, key: number) => (
                     <tr key={key}>
-                        <td><Favorite data={item}/></td>
-                        <td>{item?.name}</td>
-                        <td>{item?.visibility}</td>
-                        <td>
-                            <Image        
-                                priority    
-                                src="/assets/Eye.svg"
-                                height={20}
-                                width={20}
-                                alt=""
-                            />
+                        <td onClick={() => openModal(item)} style={{ cursor: 'pointer' }}>
+                            <span className={styles.nameRepo}>
+                                {item?.name}
+                            </span>
                         </td>
+                        <td>{item?.visibility}</td>
                     </tr>
                 ))}
             </tbody>

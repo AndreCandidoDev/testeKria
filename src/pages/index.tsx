@@ -9,7 +9,7 @@ export default function Home()
   useEffect(() => 
   {
     reposApp.getReposData()
-  }, [reposApp.user, reposApp.page])
+  }, [reposApp.user, reposApp.page, reposApp.typeRepo])
 
   return (
     <PageRepos/>

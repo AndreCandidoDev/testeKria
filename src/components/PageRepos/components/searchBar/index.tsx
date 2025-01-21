@@ -7,7 +7,7 @@ export const SearchBar = () =>
 {
     const reposApp = useContext(ReposContext)
 
-    const [userName, setUserName] = useState("")
+    const [userName, setUserName] = useState<string>("")
     const ref = useRef<HTMLInputElement>(null)
 
     const handleSearch = () =>

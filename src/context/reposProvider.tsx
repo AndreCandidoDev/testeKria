@@ -1,3 +1,4 @@
+import { dataRepo } from '@/interfaces/modalRepo.i';
 import { Octokit } from 'octokit';
 import { ReactNode, createContext, useState } from 'react';
 
@@ -5,17 +6,23 @@ type Props = {
   children: ReactNode;
 };
 
+type repoTypes = {
+  type: "all" | "owner" | "public" | "private" | "member"
+}
+
 interface ReposContextType {
-  data: any[]
+  data: dataRepo[]
   user?: string
   page: number
   hasSearch: boolean
-  isLoading: boolean,
-  setData: React.Dispatch<React.SetStateAction<any[]>>
+  isLoading: boolean
+  typeRepo: "all" | "owner" | "public" | "private" | "member" 
+  setData: React.Dispatch<React.SetStateAction<dataRepo[]>>
   setUser: React.Dispatch<React.SetStateAction<string>>
   setHasSearch: React.Dispatch<React.SetStateAction<boolean>>
   setPage: React.Dispatch<React.SetStateAction<number>>
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setTypeRepo:React.Dispatch<React.SetStateAction<string>>
   getReposData: () => Promise<void>
 }
 
@@ -25,12 +32,14 @@ const defaultProvider: ReposContextType = {
   hasSearch: false,
   page: 1,
   isLoading: false,
+  typeRepo: 'all',
   setData: () => {},
   setUser: () => {},
   setHasSearch: () => {},
   getReposData: async () => {},
   setPage: () => {},
-  setIsLoading: () => {}
+  setIsLoading: () => {},
+  setTypeRepo: () => {},
 };
 
 const ReposContext = createContext<ReposContextType>(defaultProvider);
@@ -42,6 +51,7 @@ const ReposProvider = ({ children }: Props) =>
   const [hasSearch, setHasSearch] = useState(false)
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [typeRepo, setTypeRepo] = useState<any>('all')
 
   const octokit = new Octokit({
     auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN
@@ -53,7 +63,7 @@ const ReposProvider = ({ children }: Props) =>
     {
       // esse metodo so retorna os repositorios do user autenticado (retorna repositorios privados tbm)
       return await octokit.rest.repos.listForAuthenticatedUser({
-        type: 'all',
+        type: typeRepo,
         page: page,
         per_page: 10,
       })
@@ -93,10 +103,12 @@ const ReposProvider = ({ children }: Props) =>
     page,
     isLoading,
     hasSearch,
+    typeRepo,
     setUser,
     setHasSearch,
     setPage,
     setIsLoading,
+    setTypeRepo,
     getReposData,
   };
 

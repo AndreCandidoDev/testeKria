@@ -1,0 +1,13 @@
+.toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toggleFilters {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem;
+}
