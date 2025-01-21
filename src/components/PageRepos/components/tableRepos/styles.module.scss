@@ -1,0 +1,22 @@
+.tableRepos {
+    width: 100%;
+    padding: 0 1rem;
+
+    .rowHead {
+        background-color: black;
+
+        th {
+            padding: 1rem;
+            color: white;
+        }
+    }
+
+    tr > td {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+}
