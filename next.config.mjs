@@ -18,6 +18,9 @@ const nextConfig = {
 	env: {
 		NEXT_PUBLIC_GITHUB_TOKEN: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
 	},
+	images: {
+		domains: ['avatars.githubusercontent.com']
+	},
 	output: "standalone",
 	reactStrictMode: false,
   };

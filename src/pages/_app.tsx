@@ -3,6 +3,7 @@ import { Header } from "@/components/header";
 import { ReposProvider } from "@/context/reposProvider";
 import type { AppProps } from "next/app";
 import { CookiesProvider } from 'react-cookie';
+import { Toaster } from "react-hot-toast";
 
 export default function App({ Component, pageProps }: AppProps) 
 {
@@ -11,6 +12,13 @@ export default function App({ Component, pageProps }: AppProps)
       <ReposProvider>
         <Header/>
         <Component {...pageProps} />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 5000,
+            removeDelay: 1000,
+          }}
+        />
       </ReposProvider>
     </CookiesProvider>
   )

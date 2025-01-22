@@ -3,6 +3,8 @@ import styles from './styles.module.scss'
 import { useEffect, useState } from "react"
 import { modalRepoProps } from '@/interfaces/modalRepo.i';
 import { Favorite } from '@/components/favorite';
+import { formatDate } from 'date-fns';
+import { UserInfo } from './components/userInfo';
 
 export const ModalRepo: React.FC<modalRepoProps> = ({
     open,
@@ -61,46 +63,49 @@ export const ModalRepo: React.FC<modalRepoProps> = ({
                     <div className={styles.modalHeader}>
                         <Image        
                             className={styles.close}
-                            style={{ cursor: 'pointer' }}
-                            priority    
                             src="/assets/Cross.svg"
                             height={30}
                             width={30}
-                            alt=""
+                            alt="Fechar"
                             onClick={() => setOpen(false)}
                         />
                     </div>
-
+            
                     <div className={styles.infos}>
                         <div className={styles.name}>
                             <h3>{data?.name}</h3>
-                            <Favorite data={data}/>
+                            <Favorite data={data} />
                         </div>
+            
                         <div className={styles.description}>
-                            <h4>Descrição do Repositorio)</h4>
+                            <h4>Descrição do Repositório</h4>
                             <span>{data?.description}</span>
                         </div>
+            
                         <div className={styles.languages}>
-                            <h4>Linguagens Utilizadas)</h4>
+                            <h4>Linguagens Utilizadas</h4>
                             {additionalInfos.languages.map((lang, key) => (
                                 <p key={key}>{lang}</p>
                             ))}
                         </div>
+            
                         <div className={styles.lastDate}>
-                            <h4>Ultima Atualização)</h4>
-                            {data?.updated_at}
+                            <h4>Última Atualização</h4>
+                            <span>{formatDate(data?.updated_at, "dd/MM/yyyy HH:MM:SS")}</span>
                         </div>
+            
                         <div className={styles.owner}>
                             <h4>Dono do Repositório</h4>
-                            {data?.owner?.login}
+                            <UserInfo data={data.owner}/>
                         </div>
+            
                         <div className={styles.contributors}>
-                            <h4>Contribuidores)</h4>
-                            {additionalInfos.contributors.map((cont, key) => (
-                                <>
-                                    <p>{cont.login}</p>
-                                </>
-                            ))}
+                            <h4>Contribuidores</h4>
+                            <div className={styles.content}>
+                                {additionalInfos.contributors.map((cont, key) => (
+                                    <UserInfo key={key} data={cont}/>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

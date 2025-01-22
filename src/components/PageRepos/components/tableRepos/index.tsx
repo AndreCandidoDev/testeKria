@@ -42,12 +42,16 @@ export const TableRepos: React.FC<TableReposProp> = ({
             <tbody>
                 {reposApp.data && reposApp.data.map((item: dataRepo, key: number) => (
                     <tr key={key}>
-                        <td onClick={() => openModal(item)} style={{ cursor: 'pointer' }}>
+                        <td 
+                            onClick={() => openModal(item)} 
+                            style={{ cursor: 'pointer' }}
+                            data-label="Nome Repositorio"
+                        >
                             <span className={styles.nameRepo}>
                                 {item?.name}
                             </span>
                         </td>
-                        <td>{getVisibility(item?.visibility)}</td>
+                        <td data-label="Visibilidade">{getVisibility(item?.visibility)}</td>
                     </tr>
                 ))}
             </tbody>
