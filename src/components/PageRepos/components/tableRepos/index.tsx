@@ -21,6 +21,16 @@ export const TableRepos: React.FC<TableReposProp> = ({
         setDataRepo(item)
     }
 
+    const getVisibility = (visibility: string) =>
+    {
+        if(visibility === 'public')
+        {
+            return "Publico"
+        }
+
+        return "Privado"
+    }
+
     return (
         <table className={styles.tableRepos}>
             <thead>
@@ -37,7 +47,7 @@ export const TableRepos: React.FC<TableReposProp> = ({
                                 {item?.name}
                             </span>
                         </td>
-                        <td>{item?.visibility}</td>
+                        <td>{getVisibility(item?.visibility)}</td>
                     </tr>
                 ))}
             </tbody>

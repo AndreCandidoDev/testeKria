@@ -12,6 +12,11 @@
         .item {
             font-weight: 600;
             cursor: pointer;
+            max-width: 250px;
+            // font-size: 20dp;
+            white-space: nowrap;                  
+            overflow: hidden; /* "overflow" value must be different from "visible" */
+            text-overflow:    ellipsis;
 
             &:hover {
                 text-decoration: underline;

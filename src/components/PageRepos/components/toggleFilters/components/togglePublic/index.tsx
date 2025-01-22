@@ -31,7 +31,7 @@ export const TogglePublic: React.FC<TogglePublicProps> = ({ disablePublic }) =>
 
     return (
         <div className={styles.toggle}>
-            <span>Somente Repositórios Publicos</span>
+            <span>Somente Publicos</span>
             <Switch 
                 onChange={handleChange} 
                 checked={checked} 
