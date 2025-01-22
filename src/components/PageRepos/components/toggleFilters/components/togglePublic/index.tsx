@@ -3,11 +3,7 @@ import Switch from "react-switch";
 import styles from "../../styles.module.scss"
 import { ReposContext } from "@/context/reposProvider";
 
-interface TogglePublicProps {
-    disablePublic: boolean
-}
-
-export const TogglePublic: React.FC<TogglePublicProps> = ({ disablePublic }) => 
+export const TogglePublic: React.FC = () => 
 {
     const reposApp = useContext(ReposContext)
 
@@ -35,7 +31,6 @@ export const TogglePublic: React.FC<TogglePublicProps> = ({ disablePublic }) =>
             <Switch 
                 onChange={handleChange} 
                 checked={checked} 
-                disabled={disablePublic}
             />
         </div>
     )

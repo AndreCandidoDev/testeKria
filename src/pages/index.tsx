@@ -8,10 +8,18 @@ export default function Home()
 
   useEffect(() => 
   {
-    reposApp.getReposData()
-  }, [reposApp.user, reposApp.page, reposApp.typeRepo])
+    if(!reposApp.isFavorite)
+    {
+      reposApp.getReposData()
+    }
 
-  return (
-    <PageRepos/>
-  );
+    const favorites = JSON.parse(localStorage.getItem('favorite'))
+
+    const dataFavorites = Object.keys(favorites).map((item) => ( favorites[item] ))
+
+    reposApp.setData(dataFavorites)
+
+  }, [reposApp.user, reposApp.page, reposApp.typeRepo, reposApp.isFavorite])
+
+  return (<PageRepos/>)
 }

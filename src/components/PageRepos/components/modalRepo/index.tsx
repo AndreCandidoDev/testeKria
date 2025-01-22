@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import styles from './styles.module.scss'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { modalRepoProps } from '@/interfaces/modalRepo.i';
 import { Favorite } from '@/components/favorite';
 import { formatDate } from 'date-fns';
 import { UserInfo } from './components/userInfo';
+import { ReposContext } from '@/context/reposProvider';
 
 export const ModalRepo: React.FC<modalRepoProps> = ({
     open,
@@ -12,6 +13,8 @@ export const ModalRepo: React.FC<modalRepoProps> = ({
     data
 }) =>
 {
+    const reposApp = useContext(ReposContext)
+
     const [additionalInfos, setAdditionalInfos] = useState({languages: [], contributors: []})
 
     // informações de linguagens e contribuidores nao vem direto na api
@@ -74,7 +77,9 @@ export const ModalRepo: React.FC<modalRepoProps> = ({
                     <div className={styles.infos}>
                         <div className={styles.name}>
                             <h3>{data?.name}</h3>
-                            <Favorite data={data} />
+                            {!reposApp.isFavorite && (
+                                <Favorite data={data} />
+                            )}
                         </div>
             
                         <div className={styles.description}>

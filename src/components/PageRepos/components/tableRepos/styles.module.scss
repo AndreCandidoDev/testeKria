@@ -26,21 +26,27 @@
         .nameRepo {
             width: 100%;
             font-weight: 600;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-    }
 
-    tbody > tr > td {
-        &:hover {
-            text-decoration: underline;
-            color: #007BFF;
+            &:hover {
+                text-decoration: underline;
+                color: #007BFF;
+            }
         }
     }
 
     tr:nth-child(even) {
         background-color: #f2f2f2;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .tableRepos {
+        .nameRepo {
+            display: block;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }

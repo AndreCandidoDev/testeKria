@@ -1,53 +1,47 @@
 import { dataRepo } from "@/interfaces/modalRepo.i"
 
-export const favoriteRepo = (data: dataRepo, cookie: any) =>
+export const favoriteRepo = (data: dataRepo) =>
 {
-    const newCookie = {...cookie.favorite}
-
-    const storage = localStorage.getItem('favorite')
+    const storageData = localStorage.getItem('favorite')
 
     const id = String(data.id)
 
-    newCookie[id] = data
+    const newData = JSON.parse(localStorage.getItem('favorite')) || {}
 
-    if(storage)
+    if(storageData)
     {
-        const favorites = storage.split(",").filter((item: any) => item !== "")
-
-        favorites.push(id)
+        const favorites = { ...newData }
+        favorites[id] = data
         
-        localStorage.setItem("favorite", favorites.join(","))
+        localStorage.setItem("favorite", JSON.stringify(favorites))
     }
     else
     {
-        localStorage.setItem("favorite", id + ",")
+        newData[id] = data
+        localStorage.setItem("favorite", JSON.stringify(newData))
     }
     
-    return newCookie
+    return
 }
 
-export const unFavoriteRepo = (data: dataRepo, cookie: any) =>
+export const unFavoriteRepo = (data: dataRepo) =>
 {
-    const favoriteCookies = {...cookie.favorite}
+    const storage = JSON.parse(localStorage.getItem('favorite'))
 
-    const storage = localStorage.getItem('favorite')
-    
     const id = String(data.id)
     
-    delete favoriteCookies[id]
+    delete storage[id]
 
-    const newFavorites = storage.split(",").filter((item: any) => item !== "" && item !== id)
+    localStorage.setItem("favorite", JSON.stringify(storage))
 
-    localStorage.setItem("favorite", newFavorites.join(","))
-
-    return favoriteCookies
+    return
 }
 
 export const checkFavorite = (id: string) =>
 {
-    const storage = localStorage.getItem('favorite')
+    const storage = JSON.parse(localStorage.getItem('favorite')) || {}
 
-    const newFavorites = storage.split(",").find((item: any) => item === id)
+    const newFavorites = Object.keys(storage).find((item: any) => item === id)
 
     if(newFavorites)
     {

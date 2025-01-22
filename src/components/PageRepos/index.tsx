@@ -23,7 +23,13 @@ export const PageRepos: React.FC = () =>
                     {reposApp.hasSearch ?
                         <SearchBar/>
                         :
-                        <ToggleFilters/>
+                        <>
+                            {reposApp.isFavorite ?
+                                <h1>Meus Favoritos</h1>
+                                :
+                                <ToggleFilters/>
+                            }
+                        </>
                     }
                     <TableRepos 
                         setOpen={setOpen} 

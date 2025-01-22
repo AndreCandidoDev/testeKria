@@ -6,6 +6,7 @@ import { ReposContext } from "@/context/reposProvider"
 type menuItem = {
     label: string,
     hasSearch?: boolean
+    isFavorite?: boolean
     value: number
 }
 
@@ -19,6 +20,7 @@ export const Header: React.FC = () =>
     {   
         setActiveItem(item.value)
         item.hasSearch ? reposApp.setHasSearch(true) : reposApp.setHasSearch(false)
+        item.isFavorite ? reposApp.setIsFavorite(true) : reposApp.setIsFavorite(false)
     }   
 
     return (

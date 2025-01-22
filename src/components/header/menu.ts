@@ -1,6 +1,7 @@
 type Menu = {
     label: string,
     hasSearch?: boolean
+    isFavorite?: boolean
     value: number
 }[]
 
@@ -13,5 +14,10 @@ export const menu: Menu = [
         label: "Buscar Repositorios Por Usuario",
         hasSearch: true,
         value: 1,
+    },
+    {
+        label: "Favoritos",
+        isFavorite: true,
+        value: 2,
     }
 ]

@@ -16,13 +16,15 @@ interface ReposContextType {
   page: number
   hasSearch: boolean
   isLoading: boolean
+  isFavorite: boolean
   typeRepo: "all" | "owner" | "public" | "private" | "member" 
   setData: React.Dispatch<React.SetStateAction<dataRepo[]>>
   setUser: React.Dispatch<React.SetStateAction<string>>
   setHasSearch: React.Dispatch<React.SetStateAction<boolean>>
   setPage: React.Dispatch<React.SetStateAction<number>>
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  setTypeRepo:React.Dispatch<React.SetStateAction<string>>
+  setTypeRepo: React.Dispatch<React.SetStateAction<string>>
+  setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>
   getReposData: () => Promise<void>
 }
 
@@ -33,6 +35,7 @@ const defaultProvider: ReposContextType = {
   page: 1,
   isLoading: false,
   typeRepo: 'all',
+  isFavorite: false,
   setData: () => {},
   setUser: () => {},
   setHasSearch: () => {},
@@ -40,6 +43,7 @@ const defaultProvider: ReposContextType = {
   setPage: () => {},
   setIsLoading: () => {},
   setTypeRepo: () => {},
+  setIsFavorite: () => {},
 };
 
 const ReposContext = createContext<ReposContextType>(defaultProvider);
@@ -52,6 +56,7 @@ const ReposProvider = ({ children }: Props) =>
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [typeRepo, setTypeRepo] = useState<any>('all')
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
   const octokit = new Octokit({
     auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN
@@ -104,11 +109,13 @@ const ReposProvider = ({ children }: Props) =>
     isLoading,
     hasSearch,
     typeRepo,
+    isFavorite,
     setUser,
     setHasSearch,
     setPage,
     setIsLoading,
     setTypeRepo,
+    setIsFavorite,
     getReposData,
   };
 

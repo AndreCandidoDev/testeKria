@@ -3,8 +3,6 @@ import styles from "./styles.module.scss"
 import { useEffect, useState } from "react"
 import { checkFavorite, favoriteRepo, unFavoriteRepo } from "@/utils/favoriteFunctions";
 import { dataRepo } from '@/interfaces/modalRepo.i';
-import { useCookies } from 'react-cookie';
-import { addDays } from 'date-fns';
 
 interface FavoriteProps {
     data: dataRepo
@@ -13,7 +11,6 @@ interface FavoriteProps {
 export const Favorite: React.FC<FavoriteProps> = ({ data }) =>
 {
     const [active, setActive] = useState<boolean>(false)
-    const [cookie, setCookie] = useCookies(['favorite'])
 
     useEffect(() => 
     {
@@ -31,23 +28,15 @@ export const Favorite: React.FC<FavoriteProps> = ({ data }) =>
 
     const handleClick = () =>
     {
-        const expire = addDays(new Date(), 30)
-
         if(active)
         {
             setActive(false)
-            const newCookie = unFavoriteRepo(data, cookie)
-            setCookie("favorite", newCookie, {
-                expires: expire
-            })
+            unFavoriteRepo(data)
             return
         }
-
+        
         setActive(true)
-        const newCookie = favoriteRepo(data, cookie)
-        setCookie("favorite", newCookie, {
-            expires: expire
-        })
+        favoriteRepo(data)
     }
 
     return (

@@ -25,7 +25,7 @@ export const TableRepos: React.FC<TableReposProp> = ({
     {
         if(visibility === 'public')
         {
-            return "Publico"
+            return "Público"
         }
 
         return "Privado"
