@@ -91,7 +91,8 @@ export const ModalRepo: React.FC<modalRepoProps> = ({
                             {data?.updated_at}
                         </div>
                         <div className={styles.owner}>
-
+                            <h4>Dono do Repositório</h4>
+                            {data?.owner?.login}
                         </div>
                         <div className={styles.contributors}>
                             <h4>Contribuidores)</h4>
