@@ -27,7 +27,13 @@ export const PageRepos: React.FC = () =>
                             {reposApp.isFavorite ?
                                 <h1>Meus Favoritos</h1>
                                 :
-                                <ToggleFilters/>
+                                <>
+                                    {reposApp.allPublic ?
+                                        <h1>Todos Repositório Publicos</h1>
+                                        :
+                                        <ToggleFilters/>
+                                    }
+                                </>
                             }
                         </>
                     }

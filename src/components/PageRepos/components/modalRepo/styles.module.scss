@@ -12,6 +12,7 @@
 
     .content {
         width: 90%;
+        height: 90%;
         max-width: 800px;
         background: white;
         position: relative;
@@ -86,7 +87,11 @@
             }
 
             .contributors {
+                height: 200px;
+
                 .content {
+                    overflow: auto;
+
                     display: flex;
                     flex-direction: row;
                     gap: 1rem;

@@ -19,7 +19,7 @@ export default function Home()
 
     reposApp.setData(dataFavorites)
 
-  }, [reposApp.user, reposApp.page, reposApp.typeRepo, reposApp.isFavorite])
+  }, [reposApp.user, reposApp.page, reposApp.typeRepo, reposApp.isFavorite, reposApp.allPublic])
 
   return (<PageRepos/>)
 }

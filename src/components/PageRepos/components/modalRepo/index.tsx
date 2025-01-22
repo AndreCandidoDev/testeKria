@@ -93,11 +93,13 @@ export const ModalRepo: React.FC<modalRepoProps> = ({
                                 <p key={key}>{lang}</p>
                             ))}
                         </div>
-            
-                        <div className={styles.lastDate}>
-                            <h4>Última Atualização</h4>
-                            <span>{formatDate(data?.updated_at, "dd/MM/yyyy HH:MM:SS")}</span>
-                        </div>
+                        
+                        {data?.updated_at && (
+                            <div className={styles.lastDate}>
+                                <h4>Última Atualização</h4>
+                                <span>{formatDate(data?.updated_at, "dd/MM/yyyy HH:MM:SS")}</span>
+                            </div>
+                        )}
             
                         <div className={styles.owner}>
                             <h4>Dono do Repositório</h4>

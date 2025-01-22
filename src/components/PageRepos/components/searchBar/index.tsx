@@ -14,7 +14,7 @@ export const SearchBar = () =>
     {
         if(userName !== "")
         {
-            reposApp.setUser(userName)
+            reposApp.setUser(userName.trim())
         }
     }
 
