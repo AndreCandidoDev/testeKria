@@ -12,13 +12,16 @@ export default function Home()
     {
       reposApp.getReposData()
     }
+    else
+    {
+      const storage = localStorage.getItem('favorite') || "{}"
 
-    const favorites = JSON.parse(localStorage.getItem('favorite'))
-
-    const dataFavorites = Object.keys(favorites).map((item) => ( favorites[item] ))
-
-    reposApp.setData(dataFavorites)
-
+      const favorites = JSON.parse(storage)
+  
+      const dataFavorites = Object.keys(favorites).map((item) => ( favorites[item] ))
+  
+      reposApp.setData(dataFavorites)
+    }
   }, [reposApp.user, reposApp.page, reposApp.typeRepo, reposApp.isFavorite, reposApp.allPublic])
 
   return (<PageRepos/>)
